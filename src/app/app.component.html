@@ -1,6 +1,26 @@
 <!-- MAIN PAGE. HERE WE SHOULD REDIRECT TO THE REST OF COMPONENTS-->
 
-<router-outlet></router-outlet>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-11 mt-3">
+            <h1>
+                Welcome to the application {{ title }}
+            </h1>
+        </div>
+        <div class="col-md-1 mt-3">
+            <img id="logo" width="50" alt="Angular Logo" src="https://cdn.worldvectorlogo.com/logos/angular-icon.svg">
+        </div>
+    </div>
+</div>
+<hr/>
 
-<!--app-subject></app-subject>
-<app-student></app-student>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <app-students></app-students>
+        </div>
+        <div class="col">
+            <app-subjects></app-subjects>
+        </div>
+    </div>
+</div>

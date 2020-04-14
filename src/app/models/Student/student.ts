@@ -1,11 +1,11 @@
 export class Student {
+    _id: string;
     name: string;
     address: string;
-    phones: [
+    phones:
         {
             'name': string;
             'number': string;
-        }
-    ];
-    studies: [string];
+        }[];
+    studies: string[];
 }

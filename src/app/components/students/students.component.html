@@ -1,0 +1,152 @@
+<div class="jumbotron">
+    <div class="container">
+        <h3>Students</h3>
+    </div>
+    
+    
+    <div class="card">
+        <div class="card-body">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-5 mt-2">
+                        <h5>List of Students</h5> 
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-outline-secondary" (click)="toggleGetByStudies()">By Studies</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-success" (click)="getStudents()">Refresh</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-info" (click)="toggleAddStudent()">Add</button>
+                    </div>
+                </div>
+            </div>
+            <ul class="list-group">
+                <li *ngFor="let student of studentsList; let studentindex = index"
+                class="list-group-item list-group-item-action"
+                (click)="showStudent(studentindex)">
+                Name: {{ student.name }}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="card mt-4" *ngIf="visibleGetByStudies">
+        <div class="card-body">
+            <div class="card-header">
+                <div class="row mt-3">
+                    <div class="col-md-5 mt-1">
+                        <h5>Students by Degree:</h5>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="studiesInput" placeholder=" Enter Studies (degree)" required>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-outline-dark" (click)="getStudentsByStudies()">Find</button>
+                    </div>
+                </div>
+            </div>
+            <ul class="list-group">
+                <li *ngFor="let student of studentsList; let studentindex = index"
+                class="list-group-item list-group-item-action"
+                (click)="showStudent(studentindex)">
+                Name: {{ student.name }}
+                </li>
+            </ul>
+            <div class="row mt-3">
+                <div class="span6" style="float: none; margin: 0 auto;">
+                    <button class="btn btn-danger" (click)="toggleGetByStudies()">Return</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card mt-4" *ngIf="visibleSelectedStudent">
+        <div class="card-body">
+            <h5>Selected Student</h5>
+            <label id="selectedStudentName mt-2">{{selectedStudent.name}}</label>
+            <label id="selectedStudentAddress">{{selectedStudent.address}}</label>
+            <label id="selectedStudentPhones">{{selectedStudent.phones}}</label>
+            <label id="selectedStudentStudies">{{selectedStudent.studies}}</label>
+            <div class="row mt-3">
+                <div class="span6" style="float: none; margin: 0 auto;">
+                    <button class="btn btn-danger" (click)="toggleSelectedStudent()">Return</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card mt-4" *ngIf="visibleAddStudent">
+        <div class="card-body">
+            <h5>Add a Student</h5>      
+            <form class="mt-4" class="was-validated">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" id="studentNameInput" placeholder="Enter Student name" required>
+                    <div class="valid-feedback">Valid</div>
+                    <div class="invalid-feedback">Please enter the Student name</div>
+                </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    <input type="text" class="form-control" id="studentAddressInput" placeholder="Enter Student address" required>
+                    <div class="valid-feedback">Valid</div>
+                    <div class="invalid-feedback">Please enter the Student address</div>
+                </div>
+                <div class="form-group" id="phoneElement1">
+                    <div class="row">
+                        <div class="col-10">
+                            <label>Phones:</label>
+                            <hr/>
+                        </div>
+                        <div class="col-2">
+                            <button type="button" class="btn btn-outline-dark" (click)="addPhoneForm()">Add</button>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <label>Name</label>
+                            <input type="text" class="form-control" id="studentPhoneNameInput" placeholder="Enter name" required>
+                            <div class="valid-feedback">Valid</div>
+                            <div class="invalid-feedback">Please enter the Phone name</div>
+                        </div>
+                        <div class="col">
+                            <label>Number</label>
+                            <input type="text" class="form-control" id="studentPhoneNumberInput" placeholder="Enter number" required>
+                            <div class="valid-feedback">Valid</div>
+                            <div class="invalid-feedback">Please enter the Phone number</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" id="studyElement1">
+                    <div class="row mb-2">
+                        <div class="col-10">
+                            <label>Studies(Degrees):</label>
+                            <hr/>
+                        </div>
+                        <div class="col-2">
+                            <button type="button" class="btn btn-outline-dark" (click)="addStudyForm()" id="studentStudy">Add</button>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" id="studentStudyInput" placeholder="Enter study" required>
+                    <div class="valid-feedback">Valid</div>
+                    <div class="invalid-feedback">Please enter the Study(Degree)</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <button type="button" class="btn btn-success" (click)="addStudent()">Create Student</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-danger" (click)="toggleAddStudent()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
