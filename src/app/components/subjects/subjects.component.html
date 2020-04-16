@@ -3,13 +3,6 @@
         <h3>Subjects</h3>
     </div>
 
-    <ul class="list-group">
-        <li *ngFor="let subject of subjectsList; let studentindex = index"
-        class="list-group-item list-group-item-action"
-        (click)="showSubject(studentindex)">
-        Name: {{ subject.name }}
-        </li>
-    </ul>
     <div class="card">
         <div class="card-body">
             <div class="card-header">
@@ -25,6 +18,13 @@
                     </div>
                 </div>
             </div>
+            <ul class="list-group">
+                <li *ngFor="let subject of subjectsList; let studentindex = index"
+                class="list-group-item list-group-item-action"
+                (click)="showSubject(studentindex)">
+                {{ subject.name }}
+                </li>
+            </ul>
         </div>
     </div>
 
@@ -40,15 +40,14 @@
                     </div>
                 </div>
             </div>
-                
-            <label id="selectedSubjectName">{{selectedSubject.name}}</label>
-
-            <!--ul class="list-group">
-                <li *ngFor="let student of subject.students"
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-action">{{selectedSubject.name}}</li>
+                <label class="mt-3">Students:</label>
+                <li *ngFor="let student of selectedSubject.students"
                     class="list-group-item list-group-item-action">
-                    Student Name: {{ student.name }}
+                    {{ student.name }}
                 </li>
-            </ul-->
+            </ul>
             <div class="row mt-3">
                 <div class="span6" style="float: none; margin: 0 auto;">
                     <button class="btn btn-danger" (click)="toggleSelectedSubject()">Return</button>
@@ -60,44 +59,46 @@
     <div class="card mt-4" *ngIf="visibleAddStudentToSubject">
         <div class="card-body">
             <h5>Add a Student to {{selectedSubject.name}}</h5>
-            <form class="mt-4" class="was-validated">
+            <form class="mt-4" [formGroup]="addStudentToSubjectForm" (ngSubmit)="addStudentToSubject()">
                 <div class="form-group">
-                    <label>Student _id</label>
-                    <input type="text" class="form-control" id="subjectIdInput" placeholder="Enter Student id (You can check it in the Students list)" required>
-                    <div class="valid-feedback">Valid</div>
-                    <div class="invalid-feedback">Please enter the Student id</div>
+                    <label>Student ID</label>
+                    <input [class.is-invalid]="addStudentToSubjectForm.get('studentIdInput').touched && addStudentToSubjectForm.get('studentIdInput').invalid"
+                    type="text" class="form-control" formControlName="studentIdInput" placeholder="Enter Student ID (You can check it by clicking one in the Students list)">
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <button type="submit" [disabled]="!addStudentToSubjectForm.valid" class="btn btn-success">Add Student</button>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-danger" (click)="toggleAddStudentToSubject()">Cancel</button>
+                        </div>
+                    </div>
                 </div>
             </form>
-            <div class="row">
-                <div class="col">
-                    <button type="button" class="btn btn-success" (click)="addStudentToSubject()">Add Student</button>
-                </div>
-                <div class="col">
-                    <button class="btn btn-danger" (click)="toggleAddStudentToSubject()">Cancel</button>
-                </div>
-            </div>
         </div>
     </div>
 
     <div class="card mt-4" *ngIf="visibleAddSubject">
         <div class="card-body">
                 <h5>Add a Subject</h5>
-                <form class="mt-4 mt-2" class="was-validated">
+                <form class="mt-4 mt-2" [formGroup]="addSubjectForm" (ngSubmit)="addSubject()">
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control" id="subjectNameInput" placeholder="Enter Subject name" required>
-                        <div class="valid-feedback">Valid</div>
-                        <div class="invalid-feedback">Please enter the Subject name</div>
+                        <input [class.is-invalid]="addSubjectForm.get('subjectNameInput').touched && addSubjectForm.get('subjectNameInput').invalid"
+                        type="text" class="form-control" formControlName="subjectNameInput" placeholder="Enter Subject name">
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <button type="submit" class="btn btn-success" [disabled]="!addSubjectForm.valid">Create Subject</button>
+                            </div>
+                             <div class="col-md-2">
+                                <button class="btn btn-danger" (click)="toggleAddSubject()">Cancel</button>
+                            </div>
+                        </div>
                     </div>
                 </form>
-                <div class="row">
-                    <div class="col-md-10">
-                        <button type="button" class="btn btn-success" (click)="addSubject()">Create Subject</button>
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-danger" (click)="toggleAddSubject()">Cancel</button>
-                    </div>
-                </div>
         </div>
     </div>
 
